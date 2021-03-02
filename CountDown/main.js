@@ -1,10 +1,24 @@
 // Setup End Date for Countdown (getTime == Time in Milleseconds)
-let launchDate = new Date("Jan 28, 2020 12:00:00").getTime();
+
+let params = (new URL(document.location)).searchParams;
+let passedTime = params.get("time");
+let launchDate = new Date("March 2, 2022 15:28:30").getTime();
+
+if (passedTime != null) {
+  if (!isNaN(passedTime)) {
+    launchDate = new Date(Number(passedTime)).getTime();
+  }
+  else {
+    launchDate = new Date(passedTime).getTime();
+  }
+}
 
 // Setup Timer to tick every 1 second
+let ticking = true;
 let timer = setInterval(tick, 1000);
+tick();
 
-function tick () {
+function tick() {
   // Get current time
   let now = new Date().getTime();
   // Get the difference in time to get time left until reaches 0
